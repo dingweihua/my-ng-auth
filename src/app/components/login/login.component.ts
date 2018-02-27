@@ -7,12 +7,20 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  test: string = 'just a test';
+  loading = false;
+  user: any = {};
 
   constructor(private auth: AuthService) {}
 
-  ngOnInit(): void {
-    console.log(this.auth.test());
-    alert('aaa');
+  ngOnInit() {}
+
+  login() {
+    this.loading = true;
+    this.auth.login(this.user.username, this.user.password)
+      .subscribe(
+      data => {
+        alert('Login success!');
+        this.loading = false;
+      });
   }
 }
